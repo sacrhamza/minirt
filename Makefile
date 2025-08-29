@@ -1,8 +1,8 @@
 CC = cc
 
-HEADER_DIR = include
+HEADERS_DIR = include
 
-FLAGS = -Wall -Wextra -Werror -I $(HEADER_DIR)
+FLAGS = -Wall -Wextra -Werror -I $(HEADERS_DIR)
 
 TARGET = miniRt
 
@@ -18,11 +18,15 @@ RM = rm -f
 %.o: %.c
 	$(CC) $(FLAGS) $< -c -o $@
 
-$(TARGET): $(OBJECT_FILES)
-	$(CC) $(FLAGS) $^ -o $(TARGET) -lm
+$(TARGET): $(OBJECT_FILES) libft/libft.a
+	$(CC) $(FLAGS) $^ -o $(TARGET) -lm libft/libft.a
+
+libft/libft.a:
+	make -C libft
 
 clean:
 	$(RM) $(OBJECT_FILES) 
+	make fclean -C libft
 
 fclean: clean
 	$(RM) $(TARGET)
