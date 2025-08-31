@@ -6,7 +6,7 @@ FLAGS = -Wall -Wextra -Werror -I $(HEADERS_DIR)
 
 TARGET = miniRt
 
-FILES = mandatory/parsing/minirt.c mandatory/parsing/parsing.c
+FILES = $(wildcard mandatory/parsing/*.c) $(wildcard ./mandatory/utils/*.c) $(wildcard get_next_line/*.c)
 
 OBJECT_FILES = $(FILES:%.c=%.o)
 
@@ -19,7 +19,7 @@ RM = rm -f
 	$(CC) $(FLAGS) $< -c -o $@
 
 $(TARGET): $(OBJECT_FILES) libft/libft.a
-	$(CC) $(FLAGS) $^ -o $(TARGET) -lm libft/libft.a
+	$(CC) $(FLAGS) $^ -o $(TARGET) -lm 
 
 libft/libft.a:
 	make -C libft

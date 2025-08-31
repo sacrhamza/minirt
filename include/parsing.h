@@ -3,6 +3,7 @@
 # define ARGUMENT_NBR_ERROR "ERROR: number of argument not valid, \
 expected: 1 argument => file.rt"
 # define FILE_EXTENSION_ERROR "filename should have .rt extension"
+# define SPACES "\n\t "
 
 typedef enum e_error
 {
@@ -12,6 +13,6 @@ typedef enum e_error
 } t_error;
 
 void parsing(char *filename);
-void parse_file(int fd);
+void parse_scene_file(int fd);
 void throw_error(char *error, t_error exit_code);
 #endif

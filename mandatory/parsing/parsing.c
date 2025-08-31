@@ -1,15 +1,10 @@
 #include <minirt.h>
 #include <parsing.h>
 
-void parse_file(int fd)
-{
-  (void)fd;
-}
-
 void throw_error(char *error, t_error exit_code)
 {
-  write(2, "miniRt: ", 9);
-  printf("%s\n", error);
+  ft_putstr_fd("miniRt: ", 2);
+  ft_putendl_fd(error, 2);
   exit(exit_code);
 }
 
@@ -47,6 +42,6 @@ void parsing(char *filename)
     close(fd);
     throw_error(FILE_EXTENSION_ERROR, EXTENSION_ERROR);
   }
-  parse_file(fd);
+  parse_scene_file(fd);
   close(fd);
 }
