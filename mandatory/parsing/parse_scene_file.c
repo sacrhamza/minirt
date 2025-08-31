@@ -48,7 +48,7 @@ t_elem_handler *get_proper_handler(char *key, t_elem_handler *element_handlers)
   index = 0;
   while (index <= 5)
   {
-    if (strcmp(element_handlers[index].key, key) == 0)
+    if (strmatch(element_handlers[index].key, key) == 0)
       return (element_handlers + index);
     index++;
   }
