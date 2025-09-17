@@ -2,11 +2,13 @@ CC = cc
 
 HEADERS_DIR = include
 
-FLAGS = -Wall -Wextra -Werror -I $(HEADERS_DIR)
-
+FLAGS = -Wall -Wextra -Werror -I $(HEADERS_DIR)  -g
 TARGET = miniRt
 
-FILES = $(wildcard mandatory/parsing/*.c) $(wildcard ./mandatory/utils/*.c) $(wildcard get_next_line/*.c)
+FILES = $(wildcard mandatory/parsing/*.c)\
+				$(wildcard ./mandatory/utils/*.c)\
+				$(wildcard get_next_line/*.c)\
+				$(wildcard ./mandatory/rendering/*.c)
 
 OBJECT_FILES = $(FILES:%.c=%.o)
 
@@ -16,13 +18,14 @@ all: $(TARGET)
 RM = rm -f
 
 %.o: %.c
-	$(CC) $(FLAGS) $< -c -o $@
+	@$(CC) $(FLAGS) $< -c -o $@
 
 $(TARGET): $(OBJECT_FILES) libft/libft.a
-	$(CC) $(FLAGS) $^ -o $(TARGET) -lm 
+	@echo "OK"
+	@$(CC) $(FLAGS) $^ -o $(TARGET) -lmlx_Linux -lXext -lX11 -lm -lz
 
 libft/libft.a:
-	make -C libft
+	@make -C libft
 
 clean:
 	$(RM) $(OBJECT_FILES) 
@@ -41,4 +44,4 @@ push:
 norm:
 	norminette $(FILES) $(HEADER_FILE)
 run: $(TARGET)
-	./$(TARGET)
+	./$(TARGET) ./rt/scene.rt
